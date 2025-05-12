@@ -1,5 +1,5 @@
 import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
+import 'flatpickr/dist/themes/dark.css';
 
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
@@ -31,7 +31,6 @@ const options = {
       startBtn.disabled = true;
     } else {
       startBtn.disabled = false;
-      textInput.disabled = false;
       userSelectedDate = selectedDate;
     }
   },

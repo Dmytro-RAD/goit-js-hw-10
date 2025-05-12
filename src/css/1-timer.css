@@ -1,13 +1,8 @@
-.timer-container {
-  margin: 100px auto;
-  max-width: 300px;
-}
-
 .text-input {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   width: 220px;
   height: 30px;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .text-input:disabled {
@@ -16,7 +11,7 @@
 
 .timer {
   display: flex;
-  max-width: 300px;
+  max-width: 250px;
 }
 .field {
   display: flex;
