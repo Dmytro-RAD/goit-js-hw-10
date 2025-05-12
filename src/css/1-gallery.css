@@ -1,0 +1,26 @@
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  min-width: 1128px;
+  margin: 0 auto;
+  gap: 24px;
+}
+
+.gallery-image {
+  width: 360px;
+  height: 200px;
+  transition: transform 250ms ease-in-out;
+}
+
+.gallery-image:hover {
+  transform: scale(1.05);
+}
