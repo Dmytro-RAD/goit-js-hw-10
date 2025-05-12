@@ -1,6 +1,9 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
+
 const startBtn = document.querySelector('.start-btn');
 const textInput = document.querySelector('#datetime-picker');
 
@@ -20,10 +23,15 @@ const options = {
     const selectedDate = selectedDates[0];
 
     if (selectedDate <= new Date()) {
-      window.alert('Please choose a date in the future');
+      iziToast.show({
+        message: 'Please choose a date in the future',
+        position: 'topCenter',
+        color: 'red',
+      });
       startBtn.disabled = true;
     } else {
       startBtn.disabled = false;
+      textInput.disabled = false;
       userSelectedDate = selectedDate;
     }
   },
@@ -31,7 +39,6 @@ const options = {
 
 flatpickr('#datetime-picker', options);
 
-//===================================================================//
 let intervalId;
 
 startBtn.addEventListener('click', () => {
@@ -48,7 +55,7 @@ startBtn.addEventListener('click', () => {
       return;
     }
 
-    const { days, hours, minutes, seconds } = getTimeComponents(differTime);
+    const { days, hours, minutes, seconds } = convertMs(differTime);
 
     daysSpan.textContent = String(days).padStart(2, '0');
     hoursSpan.textContent = String(hours).padStart(2, '0');
@@ -57,11 +64,16 @@ startBtn.addEventListener('click', () => {
   }, 1000);
 });
 
-function getTimeComponents(differTime) {
-  const seconds = Math.floor((differTime / 1000) % 60);
-  const minutes = Math.floor((differTime / 1000 / 60) % 60);
-  const hours = Math.floor((differTime / (1000 * 60 * 60)) % 24);
-  const days = Math.floor(differTime / (1000 * 60 * 60 * 24));
+function convertMs(differTime) {
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  const days = Math.floor(differTime / day);
+  const hours = Math.floor((differTime % day) / hour);
+  const minutes = Math.floor(((differTime % day) % hour) / minute);
+  const seconds = Math.floor((((differTime % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
 }
